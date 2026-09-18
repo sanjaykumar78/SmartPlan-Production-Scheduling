@@ -14,7 +14,8 @@ class Config:
     DEBUG = os.getenv('FLASK_DEBUG', 'false').lower() == 'true'
     SECRET_KEY = os.getenv('SECRET_KEY', 'replace-this-secret-key')
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = os.getenv('SESSION_COOKIE_SAMESITE', 'None')
+    SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'true').lower() == 'true'
     DB_CONFIG = {
         'host': os.getenv('DB_HOST', '127.0.0.1'),
         'port': int(os.getenv('DB_PORT', '3306')),

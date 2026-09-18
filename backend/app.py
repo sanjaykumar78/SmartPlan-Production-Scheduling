@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 
@@ -14,7 +16,8 @@ from routes.auth import auth_bp
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    CORS(app, resources={r'/api/*': {'origins': ['http://127.0.0.1:8000', 'http://localhost:8000']}}, supports_credentials=True)
+    cors_origins = [origin.strip() for origin in os.getenv('CORS_ORIGINS', '*').split(',') if origin.strip()]
+    CORS(app, resources={r'/api/*': {'origins': cors_origins}}, supports_credentials=True)
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(orders_bp, url_prefix='/api/orders')
