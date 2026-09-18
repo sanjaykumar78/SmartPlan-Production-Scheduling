@@ -1,4 +1,4 @@
-const API_BASE_URL='http://127.0.0.1:5000/api';
+const API_BASE_URL='https://smartplan-production-scheduling-production.up.railway.app/api';
 const MockStore={orders:[...SmartPlanData.orders],machines:[...SmartPlanData.machines],disruptions:[],schedule:SmartPlanData.orders.map((order,index)=>({order_id:order.id,machine_id:order.machine,product_name:order.product,start_time:`2026-09-18T${String(8+index%8).padStart(2,'0')}:00:00`,end_time:`2026-09-18T${String(9+index%8).padStart(2,'0')}:30:00`,duration:order.processingTime,status:order.status,delay_minutes:order.status==='Delayed'?45:0})),reports:{production:SmartPlanData.production}};
 const apiState={usingFallback:false,lastError:null};
 
